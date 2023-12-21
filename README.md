@@ -13,13 +13,22 @@ To use the flags, you can download them from the `/flags` directory. The flags h
 Here is an example of how to use the flags:
 
 ```python
+# Import required modules
+import requests, io
 import matplotlib.pyplot as plt
 
-# Load the flag of Indonesia
-flag = plt.imread("100px/id.png")
+# Load the flag of Indonesia from the raw link
+response = requests.get("https://github.com/wildyrando/country-flag/blob/main/1000px/id.png?raw=true")
+image_data = response.content
 
-# Plot the flag
-plt.imshow(flag)
+# Create the plot
+plt.figure(figsize=(4, 3))  # Set appropriate figure size
+image = plt.imread(io.BytesIO(image_data))
+
+# Display the image
+plt.imshow(image)
+plt.axis("off")
+plt.title("Indonesian Flag")
 
 # Show the plot
 plt.show()
